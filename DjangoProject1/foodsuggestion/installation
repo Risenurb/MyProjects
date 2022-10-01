@@ -1,0 +1,75 @@
+
+
+1. pip install django
+2.  django-admin startproject foodsuggestion
+3. python manage.py runserver
+4. python manage.py startapp foodsuggestion   --- to creat an app
+5. in artur\urls define
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('travello',include('travello.urls')),
+    path('food',include('foodsuggestion.urls'))
+    #path('add',include('calc.urls'))
+]
+
+6. create in foodsuggestion file named urls.py and define:
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.menu, name='menu')]
+#in the foodsuggestion\views  define
+from django.shortcuts import render
+from django.http import HttpResponse
+
+7. Create your views here.
+def menu(request):
+    return HttpResponse("Hello World")
+
+8. creat a folder templates and in this folder create a html file
+9. specify the path in the settings file as:
+     'DIRS': [os.path.join(BASE_DIR,'templates')],
+
+
+10. define  in settings
+
+STATIC_URL = 'static/'
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR,'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'assets')
+
+
+11. define in settings
+MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+12. in html file change the href , images to django understandable format
+
+ for example : rc="{% static 'img/about-1.jpg' %}" alt="">
+
+ 13. in the head of the main html file specifi css directory:
+
+ {% load static %}
+    <link rel="stylesheet" href="{%static 'food.css'%}">
+
+14. install pgadmin
+15. install postgres
+16. install database connector by
+pip install psycopg2
+
+17. define in settings installed apps
+
+    'foodsuggestion.apps.FoodsuggestionConfig',
+
+18. run migration
+python manage.py makemigrations
+
+19. Install Pillow
+pip install Pillow
+
+20. run migration
+python manage.py sqlmigrate foodsuggestion 0001
+python manage.py migrate
+
+

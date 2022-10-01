@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<div class="back">
+<li ><a class="logadd" href="http://18.130.236.55/">Back</a></li>
+</div>
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="submit" type="submit" value="Submit"/>
+    </form>
+</div>
+{%endblock%}

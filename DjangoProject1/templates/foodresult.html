@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{%if counter == True %}
+<div class="col-lg-4 col-md-6 mb-4">
+<h1 class="a">Today we suggest you : {{objectsFood1.Dish_Name}}</h1>
+
+   <img class="img-fluid" src="{{objectsFood1.img.url}}" alt="">
+</div>
+{%else %}
+ <h1 class="a">Today we suggest you : {{objectsPrice1.price_range1_name}}</h1>
+{{counter}}
+{%endif%}
+<input class="submitresult"  onclick="window.location.href = 'http://18.130.236.55/';" type="submit" value="Start again" >
+{% endblock %}

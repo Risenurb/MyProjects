@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="logreg">
+        {% if user.is_authenticated %}
+<li ><a class="logadd" href="accounts/logout">Logout</a></li>
+ <li ><a class="logadd" href="{% url 'addfood' %}">Addfood</a></li>
+{%else%}
+<li class="b" ><a class="register" href="accounts/register">Register</a></li>
+<li class="c" ><a class="login1" href="accounts/login">Login</a></li>
+{%endif%}
+    </div>
+    <div class="foodmain">
+        {% if user.is_authenticated %}
+        <h1 class="a">Hello {{user}}, we are here to suggest you a food for today</h1>
+        {%else%}
+        <h1 class="a" >Hello, we are here to suggest you a food for today</h1>
+        {%endif%}
+        <div class="pricerange">
+            <form action="food/suggestion" method="post"  >
+                {% csrf_token %}
+                <label for="foods" class="label"> Please select price range if you dont want to select ingredients:</label>
+                <select class="select"  name="foodlist0"  >
+                    <option value="Choose">Choose</option>
+                    {% for ele in objectsPrice %}
+                    <option value={{ele.price_range1}}>{{ele.price_range1}}</option>
+                    {%endfor%}
+                </select>
+                <label for="foods" class="label"> Choose a 1st ingredient:</label>
+                <select class="select" name="foodlist1"  >
+                <option value="Choose">Choose</option>
+                {% for item in objectsFood %}
+                <option value={{item.ingredient2}}>{{item.ingredient2}}</option>
+                <option value={{item.ingredient3}}>{{item.ingredient3}}</option>
+                <option value={{item.ingredient4}}>{{item.ingredient4}}</option>
+                {%endfor%}
+            </select>
+                <label for="foods" class="label"> Choose a 2nd ingredient:<br></label>
+                <select class="select" name="foodlist2" >
+                <option value="Choose">Choose</option>
+                {% for item in objectsFood %}
+                <option value={{item.ingredient2}}>{{item.ingredient2}}</option>
+                <option value={{item.ingredient3}}>{{item.ingredient3}}</option>
+                <option value={{item.ingredient4}}>{{item.ingredient4}}</option>
+                {%endfor%}
+                </select>
+                <input class="submit" type="submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}
